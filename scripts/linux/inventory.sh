@@ -41,7 +41,9 @@ done
 # Get list of services that are running on the system
 echo "Service Info"
 echo "Services Running: $(netstat -luntp4 | grep -v "127\.0\.0" | grep "LISTEN" | wc -l)"
-netstat -luntp4 | grep -v "127\.0\.0" | grep "LISTEN"
+echo ""
+echo "Protocol    Port                  Process"
+netstat -luntp4 | grep -v "127\.0\.0" | grep "LISTEN" | awk '{ print "     " $1 "    " $4 "            " $7}'
 #systemctl list-units --type=service --state=running
 echo ""
 
