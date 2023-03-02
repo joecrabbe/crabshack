@@ -18,7 +18,13 @@ echo "Version: $VERSION"
 echo ""
 
 # Get list of non-loopback interfaces
-interfaces=$(netstat -i | grep -v 'Kernel' | grep -v 'Iface' | grep -v 'lo*' | cut -d " " -f 1)
+if [ "$ID" = "ubuntu" ]
+then 
+	interfaces=$(netstat -i | grep -v 'Kernel' | grep -v 'Iface' | grep -v 'lo*' | cut -d " " -f 1)
+elif [ "$ID" = "fedora" ]
+then 
+	interfaces=$(nmcli -t --fields "Device" c)
+fi
 
 # Get ip info <ipv4/CIDR> brd <broadcast addr> scope <scope> <ifname>
 # ip - 4 addr show <ifname> | grep inet
