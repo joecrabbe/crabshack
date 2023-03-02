@@ -48,19 +48,28 @@ done
 echo "Service Info"
 echo "Services Running: $(netstat -luntp4 | grep -v "127\.0\.0" | grep "LISTEN" | wc -l)"
 echo ""
-echo "Protocol    Port                  Process"
-netstat -luntp4 | grep -v "127\.0\.0" | grep "LISTEN" | awk '{ print "     " $1 "    " $4 "            " $7}'
-netstat -luntp4 | grep -v "127\.0\.0" | grep "udp" | awk '{ print "     " $1 "    " $4 "     " $6}'
-#systemctl list-units --type=service --state=running
+
+# Print the services table
+# Print the table header
+printf "%-8s %-21s %s\n" "Protocol" "Port" "Process"
+# Print the services listening on tcp ports
+netstat -lntp4 | grep -v "127\.0\.0" | grep "LISTEN" | while read connections
+do 
+	printf "%-8s %-21s %s\n" "$(echo $connections | cut -d ' ' -f 1)" "$(echo $connections | cut -d ' ' -f 4)" "$(echo $connections | cut -d ' ' -f 7)"
+done
+
+# Print the services open on udp ports
+netstat -lnup4 | grep -v "127\.0\.0" | grep "udp" | tr -s ' ' | while read connections
+do 
+	printf "%-8s %-21s %s\n" "$(echo $connections | cut -d ' ' -f 1)" "$(echo $connections | cut -d ' ' -f 4)" "$(echo $connections | cut -d ' ' -f 6)"
+done
 echo ""
 
+# Instructions for how to find a credible list of known vulnerabilities.
 echo "For a list of known vulnerabilities, visit https://www.cvedetails.com/vendor-search.php"
 echo "After locating and clicking on the vendor, there will be a 'Products' link at the top. Go from there."
 echo "Ubuntu Vendor: Canonical"
 echo "Fedora Vendor: Redhat"
 echo "CentOS Vendor: Redhat"
 echo "Splunk Vendor: Splunk"
-
-
-
 
