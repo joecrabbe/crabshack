@@ -1,41 +1,39 @@
-cat <<-'EOF' > /etc/yum.repos.d/CentOS-Base.repo
-[C6.10-base]
-name=CentOS-6.10 - Base
-baseurl=http://vault.epel.cloud/6.10/os/$basearch/
+[base]
+name=CentOS-$releasever - Base
+baseurl=http://vault.centos.org/$releasever/os/$basearch/
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6
 enabled=1
 metadata_expire=never
 
-[C6.10-updates]
-name=CentOS-6.10 - Updates
-baseurl=http://vault.epel.cloud/6.10/updates/$basearch/
+[updates]
+name=CentOS-$releasever - Updates
+baseurl=http://vault.centos.org/$releasever/updates/$basearch/
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6
 enabled=1
 metadata_expire=never
 
-[C6.10-extras]
-name=CentOS-6.10 - Extras
-baseurl=http://vault.epel.cloud/6.10/extras/$basearch/
+[extras]
+name=CentOS-$releasever - Extras
+baseurl=http://vault.centos.org/$releasever/extras/$basearch/
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6
 enabled=1
 metadata_expire=never
 
-[C6.10-contrib]
-name=CentOS-6.10 - Contrib
-baseurl=http://vault.epel.cloud/6.10/contrib/$basearch/
+[contrib]
+name=CentOS-$releasever - Contrib
+baseurl=http://vault.centos.org/$releasever/contrib/$basearch/
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6
 enabled=0
 metadata_expire=never
 
-[C6.10-centosplus]
-name=CentOS-6.10 - CentOSPlus
-baseurl=http://vault.epel.cloud/6.10/centosplus/$basearch/
+[centosplus]
+name=CentOS-$releasever - CentOSPlus
+baseurl=http://vault.centos.org/$releasever/centosplus/$basearch/
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6
 enabled=0
 metadata_expire=never
-EOF
