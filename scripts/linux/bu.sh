@@ -15,18 +15,9 @@ mkdir -p /root/bu/$ID
 ## Backup everything except for /dev, /proc, /sys, /tmp, /run, /mnt, /media, /root/bu \(The backup folder\), and /lost+found
 rsync -aAXHv --exclude-from=../../config_files/excludelist / /root/bu/$ID
 
+# Run integrity check on backup folder.
 echo "Rsync complete. Beginning computation of sha1 digests..."
 ./integrity.sh /root/bu/$ID
-#sleep 3
-
-# Zip the directory with all of the backed up files
-#tar -cvzf /root/bu/$ID.tar.gz /root/bu/$ID
-
-# Now that the backup is zipped up, remove the original backup
-#rm -rf /root/bu/$ID/*
-
-# Compute the sha1sum of the zipped backup
-#sha1sum /root/bu/$ID.tar.gz > /root/bu/$ID.tar.gz.sha1sum
 
 echo "Backup Complete!"
 
