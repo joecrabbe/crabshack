@@ -15,10 +15,14 @@ mkdir -p /root/bu/$ID
 ## Backup everything except for /dev, /proc, /sys, /tmp, /run, /mnt, /media, /root/bu \(The backup folder\), and /lost+found
 rsync -aAXHv --exclude-from=../../config_files/excludelist / /root/bu/$ID
 
-# Run integrity check on backup folder.
-echo "Rsync complete. Beginning computation of sha1 digests..."
-./integrity.sh /root/bu/$ID
-
+# Ask the user if they would like to calculate the hashes of the backup folder.
+echo "Would you like to calculate the hashes of everything in /root/bu/$ID?"
+select yn in "Y" "N"; do
+	case $yn in
+		Y ) ./calculate_hashes.sh /root/bu/$ID; break;;
+		N ) break;;
+	esac
+done
 echo "Backup Complete!"
 
 
