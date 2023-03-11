@@ -7,20 +7,7 @@ then echo "This script must be ran as root!"
 fi
 
 # Banner creation
-printf "" > /etc/ssh/banner.txt
-printf "=======================================================" >> /etc/ssh/banner.txt
-printf "\n=                  IMPORTANT NOTICE                   =" >> /etc/ssh/banner.txt
-printf "\n=======================================================" >> /etc/ssh/banner.txt
-printf "\nYou are attempting to access a secure server at ALLSAFE." >> /etc/ssh/banner.txt
-
-printf "\n\nBy accessing this network resource, you consent that:" >> /etc/ssh/banner.txt
-printf "\n1) Your activities may be monitored." >> /etc/ssh/banner.txt
-printf "\n2) The organization ALLSAFE may exercise it's rights under the law to" >> /etc/ssh/banner.txt
-printf "\naccess, use, and disclose ANY information obtained from your use" >> /etc/ssh/banner.txt
-printf "\nof this resource." >> /etc/ssh/banner.txt
-
-printf "\n\nBy continuing your connection attempt, you agree to the above conditions." >> /etc/ssh/banner.txt
-
+cp ../../config_files/banner /etc/ssh/banner.txt
 # Make sure banner.txt has 644 permissions
 chmod 644 /etc/ssh/banner.txt
 
