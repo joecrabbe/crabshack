@@ -46,7 +46,7 @@ done
 
 # Get list of services that are running on the system
 echo "Service Info"
-echo "Services Running: $(netstat -luntp4 | grep -v "127\.0\.0" | grep "LISTEN" | wc -l)"
+echo "Services Running: $(netstat -luntp4 | grep -v "127\.0\.0" | grep "LISTEN" | wc -l)" #TODO Services Incorrect
 echo ""
 
 # Print the services table
