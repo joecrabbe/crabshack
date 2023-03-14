@@ -3,6 +3,7 @@
 #
 # This script creates a CentOS 6 and CentOS 7.0 mirror on the machine.
 # At least 138GB of disk space is required.
+# Author: Raven
 #
 
 # Ensure Root
@@ -17,13 +18,12 @@ df -h
 echo ""
 
 # Confirm usage of disk
-echo "Running this script requires at least 138GB of disk space. Do you want to continue?"
-select yn in "Y" "N"; do
-	case $yn in
-		Y ) break;;
-		N ) exit 1; break;;
-	esac
-done
+read -p "Running this script requires at least 138GB of disk space. Do you want to continue?"
+case "$choice" in
+	y|Y ) ;;
+	n|N ) exit 1; break;;
+	* ) echo "Choose y/n.";;
+esac
 
 # Install Nginx if it is not installed
 which nginx
@@ -45,13 +45,12 @@ then
 fi
 
 # Confirm disk write action
-echo "You are about to mirror some directories from archive.kernel.org. This will take ip at least 138GB of disk space. Are you sure you want to continue?"
-select yn in "Y" "N"; do
-	case $yn in
-		Y) echo "Mirroring. This could take some time... "; break;;
-		N) exit 1; break;;
-	esac
-done
+read -p "You are about to mirror some directories from archive.kernel.org. This will take up at least 138 GB of disk space. Are you sure you want to continue?"
+case "$choice" in
+	y|Y ) break;;
+	n|N ) exit 1;;
+	* ) echo "Choose y/n.";;
+esac
 
 # Clone mirror.. Tell the user this could take some time.
 uri="rsync://archive.kernel.org/centos-vault"
@@ -70,5 +69,6 @@ systemctl restart nginx
 
 # Create firewall rule for port 80
 # Tell the user how to access the mirror
-
+echo "Mirror Clone Complete."
+exit 0
 # Done
