@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Author: Raven
+
 # Ensure root.
 if [ "$EUID" -ne 0 ]
 then echo "This script must be ran as root!"
@@ -20,7 +22,7 @@ read -p "Would you like to calculate the hashes of everything in /root/bu/$ID?"
 case "$choice" in
 	y|Y ) ./calculate_hases.sh /root/bu/$ID;;
 	n|N ) break;;
-	* ) echo "Choose y/n."
+	* ) echo "Choose y/n.";;
 esac
 
 echo "Backup Complete!"
