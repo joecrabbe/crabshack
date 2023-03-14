@@ -16,13 +16,13 @@ mkdir -p /root/bu/$ID
 rsync -aAXHv --exclude-from=../../config_files/excludelist / /root/bu/$ID
 
 # Ask the user if they would like to calculate the hashes of the backup folder.
-echo "Would you like to calculate the hashes of everything in /root/bu/$ID?"
-select yn in "Y" "N"; do
-	case $yn in
-		Y ) ./calculate_hashes.sh /root/bu/$ID; break;;
-		N ) break;;
-	esac
-done
+read -p "Would you like to calculate the hashes of everything in /root/bu/$ID?"
+case "$choice" in
+	y|Y ) ./calculate_hases.sh /root/bu/$ID;;
+	n|N ) break;;
+	* ) echo "Choose y/n."
+esac
+
 echo "Backup Complete!"
 
 
